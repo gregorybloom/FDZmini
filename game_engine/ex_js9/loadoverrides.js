@@ -9,26 +9,21 @@ function _loadJSEngineClasses(opts) {
 
 GAMESOUNDS.load = function() {
     this.gameSFX = [];
-    this.gameSFX[0] = 'sfx/Beep_Low_07.ogg';
-    this.gameSFX[1] = 'sfx/Beep_Tech_01.ogg';
-    this.gameSFX[2] = 'sfx/Explosion_Pulse.ogg';
-    this.gameSFX[3] = 'sfx/1407409278hat.wav';
-//    this.gameSFX[0] = 'sounds/effects/Beep_Low_07.ogg';
-//    this.gameSFX[1] = 'sounds/effects/Beep_Tech_01.ogg';
-//    this.gameSFX[2] = 'sounds/effects/Explosion_Pulse.ogg';
+    this.gameSFX[0] = 'resources/sfx/Beep_Low_07.ogg';
+    this.gameSFX[1] = 'resources/sfx/Beep_Tech_01.ogg';
+    this.gameSFX[2] = 'resources/sfx/Explosion_Pulse.ogg';
+    this.gameSFX[3] = 'resources/sfx/1407409278hat.wav';
 };
 GAMEMUSIC.load = function(domain) {
-  this.gameSongs[0] = "music/zero_chan.ogg";
-//    this.gameSongs[0] = "sounds/music/Jeremy-20180323-firsthalf.mp3";
-//    this.gameSongs[1] = "sounds/music/08_from_the_legend_of_zelda_-_triforce_of_the_gods_legend_of_zelda_theme.ogg";
+  this.gameSongs[0] = "resources/music/zero_chan.ogg";
 };
 GAMEVIEW.loadTextures = function()
 {
-    this.loadImg(10, "images/Link.png");
-    this.loadImg(11, "images/monsters.png");
-    this.loadImg(13, "images/tinyset-landtiles-buf.png");
-    this.loadImg(100, "images/uVQ0X.jpg");
-    this.loadImg(101, "images/aTQuf.png");
+    this.loadImg(10, "resources/images/Link.png");
+    this.loadImg(11, "resources/images/monsters.png");
+    this.loadImg(13, "resources/images/tinyset-landtiles-buf.png");
+    this.loadImg(100, "resources/images/uVQ0X.jpg");
+    this.loadImg(101, "resources/images/aTQuf.png");
     return true;
 };
 GAMEANIMATIONS.loadTextureFrames = function()
