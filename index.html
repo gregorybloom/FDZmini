@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Hello World!</title>
+
+      <script>
+      var getEngineType = function() {
+        if( typeof process !== "undefined" && process.versions['electron'] && typeof require === "function" ) {
+          return 'electron';
+        }
+        else {
+          return 'browser';
+        }
+      };
+      var asyncBrowserLoad = function(url, opts, call) {
+          if(typeof opts === "undefined" || opts == null)		opts = {};
+      //			  based on:				https://stackoverflow.com/questions/12820953/asynchronous-script-loading-callback
+          var d = document, t = 'script',
+              o = d.createElement(t);
+          var ar = d.getElementsByTagName(t);
+          var s = ar[ar.length-1];
+
+          if( url.match("^file\:\/\/") )		      o.src = url;
+          else if( url.match("^https?\:\/\/") )		o.src = url;
+          else  	o.src = '//' + url;
+
+          if(opts['defer'])			o.defer = true;
+
+          var newopts = JSON.parse( JSON.stringify( opts ));
+  				if (call) { o.addEventListener('load', function (e) { call(newopts, e); }, false); }
+  				s.parentNode.insertBefore(o, s);
+      };
+      </script>
+
+      <script>
+      if( getEngineType() == 'electron' ) {
+        var GameEngine = require('./engine.js');
+        GameEngine.init();
+      }
+      if( getEngineType() == 'browser' ) {
+        //      http://jqfundamentals.com/chapter/jquery-basics
+
+        var path = window.location.href;
+				path = (path.match(/^(.*[\/\\])/mg)).pop();
+        asyncBrowserLoad(path+"/jquery-3.3.1.min.js",{"defer":true},function(_o,_e) {
+            asyncBrowserLoad(path+"/engine.js", {"defer":true}, function(_opts, _e) {
+
+                GameEngine.init();
+            }.bind(this));
+        }.bind(this));
+      }
+      </script>
+
+      <style>
+          #renderarea {
+            width:800px;
+            height:600px;
+          }
+      		.canvas {
+      			border:1px solid #000000;
+      		}
+    			div#renderarea {
+    				position:relative;
+    				border:1px solid #000000;
+    			}
+    			div#renderarea canvas {
+    				position:absolute;
+    				top:0px;
+    				bottom:0px;
+    				left:0px;
+    				right:0px;
+    				border:1px solid #990000;
+    			}
+      </style>
+    </head>
+    <body>
+      <h1>Hello World!</h1>
+
+      <div id="renderarea">
+    	</div>
+
+    </body>
+  </html>
